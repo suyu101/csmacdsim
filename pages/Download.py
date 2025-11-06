@@ -8,7 +8,10 @@ st.set_page_config(
     page_icon="📥",
     layout="wide"
 )
-
+st.sidebar.page_link('Home.py', label='Home')
+st.sidebar.page_link('pages/CSMA_CD.py', label='CSMA/CD')
+st.sidebar.page_link('pages/Slotted_Aloha.py', label='Slotted_Aloha')
+st.sidebar.markdown("---")
 # Custom CSS
 st.markdown("""
 <style>
