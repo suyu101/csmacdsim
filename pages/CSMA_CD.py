@@ -11,7 +11,7 @@ st.set_page_config(
     layout="wide"
 )
 st.sidebar.page_link('Home.py', label='Home')
-#comment out CSMA/CA page like Pure_Aloha.py page for now, we'll display it later
+#st.sidebar.page_link('pages/CSMA_CA.py', label='CSMA/CA')
 st.sidebar.page_link('pages/CSMA_CD.py', label='CSMA/CD')
 #st.sidebar.page_link('pages/Pure_Aloha.py', label='Pure Aloha')
 st.sidebar.page_link('pages/Slotted_Aloha.py', label='Slotted_Aloha')
@@ -271,8 +271,16 @@ if run_simulation:
         for i, v in enumerate(utils):
             axes[2].text(i, v * 100 + 1, f"{v*100:.1f}%", ha='center', fontweight='bold')
 
-        plt.tight_layout()
+        # Improve readability of x-axis labels and spacing
+        for ax in axes:
+            ax.set_xticklabels(protocols, rotation=15, ha='right', fontsize=9)
+            ax.tick_params(axis='x', labelsize=9)
+            ax.margins(x=0.1)
+            
+        plt.tight_layout(pad=3.0, rect=[0, 0.05, 1, 1])
         st.pyplot(fig)
+        fig, axes = plt.subplots(1, 3, figsize=(17, 4))
+
 
         # Download comparison CSV
         comp_df = pd.DataFrame({
