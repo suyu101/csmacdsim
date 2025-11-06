@@ -7,7 +7,9 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-
+st.sidebar.page_link('Home.py', label='Home')
+st.sidebar.page_link('pages/CSMA_CD.py', label='CSMA/CD')
+st.sidebar.page_link('pages/Slotted_Aloha.py', label='Slotted_Aloha')
 # Custom CSS for navigation bar and styling
 st.markdown("""
 <style>
@@ -56,18 +58,14 @@ st.markdown("""
         transform: translateY(-5px);
         box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
-    div[data-testid="stSidebarNav"] ul li a[href*="Download"],
-    div[data-testid="stSidebarNav"] ul li a[href*="Help"],
-    div[data-testid="stSidebarNav"] ul li a[href*="Learn"],
-    div[data-testid="stSidebarNav"] ul li a[href*="Developed_by"] {
-        display: none;
-    }
 </style>
 """, unsafe_allow_html=True)
-
+st.divider()
 # Navigation Bar
-col1, col2, col3, col4, col5 = st.columns([3, 1, 1, 1, 1.5])
-
+col1, col2, col3, col4, col5 = st.columns([1, 1, 1, 1, 1])
+with col1:
+    if st.button("Home", use_container_width=True):
+        st.switch_page("Home.py")
 with col2:
     if st.button("Download", use_container_width=True):
         st.switch_page("pages/Download.py")
