@@ -6,50 +6,16 @@ st.set_page_config(
     page_icon="👥",
     layout="wide"
 )
+
+# Sidebar navigation links (from your code)
 st.sidebar.page_link('Home.py', label='Home')
 st.sidebar.page_link('pages/CSMA_CD.py', label='CSMA/CD')
 st.sidebar.page_link('pages/Slotted_Aloha.py', label='Slotted_Aloha')
 st.sidebar.markdown("---")
-# Custom CSS
+
+# Custom CSS for the header
 st.markdown("""
 <style>
-    .member-card {
-        background: white;
-        padding: 2rem;
-        border-radius: 15px;
-        border: 2px solid #e0e0e0;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        text-align: center;
-        transition: transform 0.3s, box-shadow 0.3s;
-        margin: 1rem 0;
-    }
-    .member-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-    }
-    .photo-placeholder {
-        width: 150px;
-        height: 150px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 50%;
-        margin: 0 auto 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 3rem;
-        color: white;
-    }
-    .member-name {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #333;
-        margin: 0.5rem 0;
-    }
-    .member-reg {
-        font-size: 1.1rem;
-        color: #666;
-        margin: 0.5rem 0;
-    }
     .page-header {
         text-align: center;
         padding: 2rem 0;
@@ -62,7 +28,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.divider()
-# Navigation Bar
+
+# Navigation Bar (from your code)
 col1, col2, col3, col4, col5 = st.columns([1, 1, 1, 1, 1])
 with col1:
     if st.button("Home", use_container_width=True):
@@ -70,132 +37,81 @@ with col1:
 with col2:
     if st.button("Download", use_container_width=True):
         st.switch_page("pages/Download.py")
-
 with col3:
     if st.button("Help", use_container_width=True):
         st.switch_page("pages/Help.py")
-
 with col4:
     if st.button("Learn", use_container_width=True):
         st.switch_page("pages/Learn.py")
-
 with col5:
-    if st.button("Developed by", use_container_width=True):
+    # Set this as 'primary' to show it's the active page
+    if st.button("Developed by", use_container_width=True, type="primary"):
         st.switch_page("pages/Developed_by.py")
 
 st.divider()
 
-# Header
+# Header Section (from your code)
 st.markdown("""
 <div class="page-header">
-    <h1>👥 Developed By</h1>
-    <p style="font-size: 1.2rem; margin-top: 0.5rem;">
-        Meet the Team Behind This Project
-    </p>
+    <h1>Developed By</h1>
 </div>
 """, unsafe_allow_html=True)
 
-# Team Members Section
-st.markdown("## 👨‍💻 Project Team Members")
+# --- START: FIXED SECTION ---
 
-# You can customize this - add as many members as needed
-col1, col2 = st.columns(2)
+st.markdown("## 👥 Project Team Members")
 
-with col1:
-    st.markdown("""
-    <div class="member-card">
-        <div class="photo-placeholder">👤</div>
-        <div class="member-name">Your Name</div>
-        <div class="member-reg">Reg No: XXXXXXXX</div>
-    </div>
-    """, unsafe_allow_html=True)
+team_members = [
+    {"name": "Katyayni Aarya", "reg_no": "24BCE1543", "photo": "images/p1.jpg"},
+    {"name": "Suyesha Saha", "reg_no": "24BCE1962", "photo": "images/p2.jpg"}
+]
+
+# Loop through each member and create a container with columns
+for member in team_members:
+    # Use a bordered container to create a "card" effect
+    with st.container(border=True):
+        # Create columns: 1 part for image, 3 parts for text
+        col1, col2 = st.columns([1, 3])
+        
+        with col1:
+            # FIX: Call st.image() directly
+            # Make sure the path 'images/p1.jpg' is correct!
+            try:
+                st.image(member['photo'], width=150)
+            except Exception as e:
+                st.error(f"Could not load image: {member['photo']}")
+                st.caption("Please check the file path.")
+
+        with col2:
+            # FIX: Use standard streamlit elements for text
+            st.subheader(member['name'])
+            st.markdown(f"**Registration No:** {member['reg_no']}")
     
-    # Button to upload photo (optional)
-    if st.button("📸 Upload Photo", key="photo1"):
-        st.info("Photo upload functionality - Add your photo here")
+    st.write("") # Adds a little vertical space between members
 
-with col2:
-    st.markdown("""
-    <div class="member-card">
-        <div class="photo-placeholder">👤</div>
-        <div class="member-name">Team Member 2</div>
-        <div class="member-reg">Reg No: XXXXXXXX</div>
-    </div>
-    """, unsafe_allow_html=True)
+st.divider()
+
+# --- ADDED: GUIDE SECTION ---
+
+st.markdown("## 🧑‍🏫 Project Guide")
+
+# Update this with your guide's information
+guide_info = {
+    "name": "Dr. Guide Name",
+    "title": "Professor, School of Computer Science",
+    "photo": "images/p2.jpg" # Make sure this path is correct
+}
+
+with st.container(border=True):
+    col1, col2 = st.columns([1, 3])
     
-    if st.button("📸 Upload Photo", key="photo2"):
-        st.info("Photo upload functionality - Add your photo here")
-
-st.divider()
-
-# Add yourself section
-st.markdown("## ➕ Add Team Member")
-
-with st.expander("Click to add your information"):
-    name = st.text_input("Your Name", placeholder="Enter your full name")
-    reg_no = st.text_input("Registration Number", placeholder="Enter your registration number")
-    role = st.text_input("Role in Project", placeholder="e.g., Developer, Designer, Researcher")
+    with col1:
+        try:
+            st.image(guide_info['photo'], width=150)
+        except Exception as e:
+            st.error(f"Could not load image: {guide_info['photo']}")
+            st.caption("Please check the file path.")
     
-    if st.button("Add Member", type="primary"):
-        if name and reg_no:
-            st.success(f"Added {name} - {reg_no} to the team!")
-        else:
-            st.error("Please fill in all required fields")
-
-st.divider()
-
-# Project Information
-st.markdown("## 📋 Project Information")
-
-col_a, col_b = st.columns(2)
-
-with col_a:
-    st.markdown("""
-    ### Project Details
-    - **Course**: Computer Networks
-    - **Project**: Network Protocol Simulator
-    - **Protocols Implemented**: 
-        - CSMA/CD (with variants)
-        - Slotted ALOHA
-    - **Technologies Used**: 
-        - Python
-        - Streamlit
-        - NumPy
-        - Matplotlib
-        - Pandas
-    """)
-
-with col_b:
-    st.markdown("""
-    ### Features Implemented
-    - ✅ Interactive protocol simulations
-    - ✅ Real-time visualization
-    - ✅ Performance metrics
-    - ✅ Gantt timeline charts
-    - ✅ Data export (CSV)
-    - ✅ Protocol comparison
-    - ✅ Educational content
-    """)
-
-st.divider()
-
-# Acknowledgments
-st.markdown("## 🙏 Acknowledgments")
-
-st.markdown("""
-We would like to express our gratitude to:
-- Our course instructor for guidance and support
-- Our university for providing the resources
-- The open-source community for amazing tools and libraries
-""")
-
-# Footer
-st.divider()
-st.markdown("""
-<div style="text-align: center;">
-    <p style="font-size: 0.9rem; color: #666;">
-        Network Protocol Simulator | Computer Networks Project<br>
-        © 2024 All Rights Reserved
-    </p>
-</div>
-""", unsafe_allow_html=True)
+    with col2:
+        st.subheader(guide_info['name'])
+        st.markdown(f"**{guide_info['title']}**")
