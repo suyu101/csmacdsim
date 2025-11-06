@@ -3,14 +3,40 @@ import streamlit as st
 # Page configuration
 st.set_page_config(
     page_title="Network Protocol Simulator",
-    page_icon="assets/logo.png",
+    page_icon="🌐",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for better styling
+# Custom CSS for navigation bar and styling
 st.markdown("""
 <style>
+    .nav-bar {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        align-items: center;
+    }
+    .nav-button {
+        background-color: white;
+        color: #667eea;
+        padding: 0.5rem 1.5rem;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s;
+        border: 2px solid white;
+    }
+    .nav-button:hover {
+        background-color: #667eea;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
     .main-header {
         text-align: center;
         padding: 2rem 0;
@@ -30,8 +56,35 @@ st.markdown("""
         transform: translateY(-5px);
         box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
+    div[data-testid="stSidebarNav"] ul li a[href*="Download"],
+    div[data-testid="stSidebarNav"] ul li a[href*="Help"],
+    div[data-testid="stSidebarNav"] ul li a[href*="Learn"],
+    div[data-testid="stSidebarNav"] ul li a[href*="Developed_by"] {
+        display: none;
+    }
 </style>
 """, unsafe_allow_html=True)
+
+# Navigation Bar
+col1, col2, col3, col4, col5 = st.columns([3, 1, 1, 1, 1.5])
+
+with col2:
+    if st.button("Download", use_container_width=True):
+        st.switch_page("pages/Download.py")
+
+with col3:
+    if st.button("Help", use_container_width=True):
+        st.switch_page("pages/Help.py")
+
+with col4:
+    if st.button("Learn", use_container_width=True):
+        st.switch_page("pages/Learn.py")
+
+with col5:
+    if st.button("Developed by", use_container_width=True):
+        st.switch_page("pages/Developed_by.py")
+
+st.divider()
 
 # Header
 st.markdown("""
@@ -220,8 +273,6 @@ st.markdown("""
 <div style="text-align: center;">
     <p style="font-size: 0.9rem; color: #666;">
         Developed for Computer Networks Project<br>
-        Copyright © 2025 Katyayni Aarya and Suyesha Saha.<br>
-        All rights reserved.
     </p>
 </div>
 """, unsafe_allow_html=True)

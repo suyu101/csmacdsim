@@ -10,6 +10,28 @@ st.set_page_config(
     layout="wide"
 )
 
+
+# Navigation Bar
+col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
+
+with col1:
+    if st.button("Home", use_container_width=True):
+        st.switch_page("Home.py")
+
+with col2:
+    if st.button("Download", use_container_width=True):
+        st.switch_page("pages/Download.py")
+
+with col3:
+    if st.button("Help", use_container_width=True):
+        st.switch_page("pages/Help.py")
+
+with col4:
+    if st.button("Learn", use_container_width=True):
+        st.switch_page("pages/Learn.py")
+
+st.divider()
+
 # Title and description
 st.title("Slotted ALOHA Protocol Simulator")
 st.markdown("""
@@ -391,8 +413,6 @@ st.markdown("""
 <div style="text-align: center;">
     <p style="font-size: 0.9rem; color: #666;">
         Developed for Computer Networks Project | Slotted ALOHA Protocol Simulator<br>
-        Copyright © 2025 Katyayni Aarya and Suyesha Saha.<br>
-        All rights reserved.
     </p>
 </div>
 """, unsafe_allow_html=True)
