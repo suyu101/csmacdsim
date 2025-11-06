@@ -11,13 +11,12 @@ st.set_page_config(
     layout="wide"
 )
 
+st.divider()
 # Navigation Bar
-col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
-
+col1, col2, col3, col4, col5 = st.columns([1, 1, 1, 1, 1])
 with col1:
     if st.button("Home", use_container_width=True):
         st.switch_page("Home.py")
-
 with col2:
     if st.button("Download", use_container_width=True):
         st.switch_page("pages/Download.py")
@@ -29,6 +28,10 @@ with col3:
 with col4:
     if st.button("Learn", use_container_width=True):
         st.switch_page("pages/Learn.py")
+
+with col5:
+    if st.button("Developed by", use_container_width=True):
+        st.switch_page("pages/Developed_by.py")
 
 st.divider()
 
