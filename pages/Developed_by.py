@@ -55,53 +55,44 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-st.markdown("## Project Team Members and Guide")
-
-team_members = [
+students = [
     {"name": "Katyayni Aarya", "reg_no": "24BCE1543", "photo": "images/me.png"},
-    {"name": "Suyesha Saha", "reg_no": "24BCE1962", "photo": "images/suyesha.jpg"}
+    {"name": "Suyesha Saha", "reg_no": "24BCE1962", "photo": "images/suyesha.jpg"},
 ]
 
-guide_info = {
+guide = {
     "name": "Dr. Swaminathan Annadurai",
     "title": "Professor, School of Computer Science",
     "photo": "images/guide.jpg"
 }
 
-# Use two main columns: left = team members (stacked), right = project guide
-left_col, right_col = st.columns([1.5, 2])
+left_col, right_col = st.columns([2, 1.5], gap="large")
 
+# --- LEFT COLUMN: Stacked Team Members ---
 with left_col:
     st.markdown("### Team Members")
-    # Render each team member in a compact horizontal row
-    for idx, member in enumerate(team_members):
-        with st.container():
-            mcol1, mcol2 = st.columns([1, 4])
+    for member in students:
+        # Removed the divider, added border=True here
+        with st.container(border=True):
+            mcol1, mcol2 = st.columns([1, 3])
             with mcol1:
                 try:
-                    # slightly smaller images to reduce wasted space
-                    st.image(member['photo'], width=110)
+                    st.image(member['photo'], use_container_width=True)
                 except Exception:
-                    st.error(f"Could not load image: {member['photo']}")
-                    st.caption("Please check the file path.")
+                    st.error("Image missing")
             with mcol2:
                 st.subheader(member['name'])
-                st.markdown(f"**Registration No:** {member['reg_no']}")
-        # subtle separator between members
-        if idx < len(team_members) - 1:
-            st.markdown("---")
+                st.write(f"**Reg No:** {member['reg_no']}")
 
+# --- RIGHT COLUMN: Project Guide ---
 with right_col:
     st.markdown("### Project Guide")
-    with st.container():
-        gcol1, gcol2 = st.columns([1, 3])
-        with gcol1:
-            try:
-                st.image(guide_info['photo'], width=150)
-            except Exception:
-                st.error(f"Could not load image: {guide_info['photo']}")
-                st.caption("Please check the file path.")
-        with gcol2:
-            st.subheader(guide_info['name'])
-            st.markdown(f"**{guide_info['title']}**")
-            st.markdown("---")
+    with st.container(border=True):
+        try:
+            # Centering the guide's photo looks nice in a single column
+            st.image(guide['photo'], width=150) 
+        except Exception:
+             st.error("Image not found")
+             
+        st.subheader(guide['name'])
+        st.write(guide['title'])
